@@ -5,3 +5,8 @@ using Revise, Test
     AdventOfCode2023.Day01.day01()
     @test AdventOfCode2023.Day01.day01() == (54304, 54418)
 end
+
+@testset "Day 02" begin
+    AdventOfCode2023.Day02.day02()
+    @test AdventOfCode2023.Day02.day02() == (2563, 70768)
+end
