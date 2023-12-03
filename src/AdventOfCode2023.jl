@@ -8,7 +8,7 @@ using Printf
 using OutMacro; export @out
 using DelimitedFiles; export readdlm
 
-solvedDays = [i for i ∈ 1:2]
+solvedDays = [i for i ∈ 1:3]
 
 # Read the input from a file:
 function readInput(path::String)
@@ -41,7 +41,6 @@ export generate_image
 # Include the source files:
 for day in solvedDays
     ds = @sprintf("%02d", day)
-    print(ds)
     include(joinpath(@__DIR__, "day$ds.jl"))
 end
 
@@ -74,6 +73,7 @@ function benchmark(days=solvedDays)
     end
     return results
 end
+export benchmark
 
 # Write the benchmark results into a markdown string:
 function _to_markdown_table(bresults)
