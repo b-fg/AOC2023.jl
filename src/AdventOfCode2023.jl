@@ -8,7 +8,7 @@ using Printf
 using OutMacro; export @out
 using DelimitedFiles; export readdlm
 
-solvedDays = [i for i ∈ 1:3]
+solvedDays = [i for i ∈ 1:4]
 
 # Read the input from a file:
 function readInput(path::String)
