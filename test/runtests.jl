@@ -20,3 +20,8 @@ end
     AdventOfCode2023.Day04.day04()
     @test AdventOfCode2023.Day04.day04() == (15205, 6189740)
 end
+
+@testset "Day 05" begin
+    AdventOfCode2023.Day05.day05()
+    @test AdventOfCode2023.Day05.day05() == (157211394, 50855035)
+end
