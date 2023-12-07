@@ -6,9 +6,9 @@ using Revise
 using BenchmarkTools
 using Printf
 using OutMacro; export @out
-using DelimitedFiles; export readdlm
+using DelimitedFiles; export readdl6
 
-solvedDays = [i for i ∈ 1:5]
+solvedDays = [i for i ∈ 1:6]
 
 # Read the input from a file:
 function readInput(path::String)
