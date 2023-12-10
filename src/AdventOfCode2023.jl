@@ -7,7 +7,7 @@ using BenchmarkTools
 using Printf
 using OutMacro; export @out
 
-solvedDays = [i for i ∈ 1:8]
+solvedDays = [i for i ∈ 1:9]
 
 # Read the input from a file:
 function readInput(path::String)
