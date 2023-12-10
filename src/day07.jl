@@ -1,6 +1,6 @@
 module Day07
 
-using AdventOfCode2023, Revise
+using AdventOfCode2023
 
 const cards_p1 = "AKQJT98765432"
 const cards_p2 = "AKQT98765432J"
@@ -49,9 +49,9 @@ function strength(hand, part)
     end
 end
 
-function day07(input::String=readInput(07))
-    hands_p1 = [Hand(hand[1], parse(Int, hand[2]), strength(hand[1], 1), cards_p1) for hand in split.(split(strip(input), "\n"), " ")]
-    hands_p2 = [Hand(hand[1], parse(Int, hand[2]), strength(hand[1], 2), cards_p2) for hand in split.(split(strip(input), "\n"), " ")]
+function day07(input=readInput(07))
+    hands_p1 = [Hand(hand[1], parse(Int, hand[2]), strength(hand[1], 1), cards_p1) for hand in split.(split(input, "\n"), " ")]
+    hands_p2 = [Hand(hand[1], parse(Int, hand[2]), strength(hand[1], 2), cards_p2) for hand in split.(split(input, "\n"), " ")]
     return tuple([sum(hand.bid * i for (i, hand) in enumerate(sort(hands))) for hands in [hands_p1, hands_p2]]...)
 end
 

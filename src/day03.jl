@@ -1,17 +1,17 @@
 module Day03
 
-using AdventOfCode2023
-using PaddedViews
+using AdventOfCode2023, PaddedViews
 
-function day03(input::String=readInput(03))
-    function generate_matrix(input)
-        lines = split(strip(input), "\n")
-        m = Matrix{Char}(undef, length(lines), length(lines[1]))
-        for i ∈ axes(m, 1), j ∈ axes(m, 2)
-            m[i, j] = lines[i][j]
-        end
-        PaddedView('.', m, (0:size(m, 1) + 1, 0:size(m, 2) + 1))
+function generate_matrix(input)
+    lines = split(input, "\n")
+    m = Matrix{Char}(undef, length(lines), length(lines[1]))
+    for i ∈ axes(m, 1), j ∈ axes(m, 2)
+        m[i, j] = lines[i][j]
     end
+    PaddedView('.', m, (0:size(m, 1) + 1, 0:size(m, 2) + 1))
+end
+
+function day03(input=readInput(03))
     m = generate_matrix(input)
 
     # Part 1

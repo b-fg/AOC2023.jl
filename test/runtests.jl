@@ -1,5 +1,4 @@
-using AdventOfCode2023
-using Revise, Test
+using AdventOfCode2023, Test
 
 @testset "Day 01" begin
     @test AdventOfCode2023.Day01.day01() == (54304, 54418)

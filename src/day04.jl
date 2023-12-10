@@ -2,13 +2,13 @@ module Day04
 
 using AdventOfCode2023
 
-function day04(input::String=readInput(04))
-    function count_gains(card)
-        winning_numbers, numbers = split(card, " | ") .|> x -> parse.(Int, split(x, " "; keepempty=false))
-        return intersect(Set(winning_numbers), Set(numbers)) |> length
-    end
+function count_gains(card)
+    winning_numbers, numbers = split(card, " | ") .|> x -> parse.(Int, split(x, " "; keepempty=false))
+    return intersect(Set(winning_numbers), Set(numbers)) |> length
+end
 
-    cards = [split(c, ": ")[end] for c in split(strip(input), "\n")]
+function day04(input=readInput(04))
+    cards = [split(c, ": ")[end] for c in split(input, "\n")]
     count_p1, copies = 0, ones(Int, length(cards))
     for (i, card) in enumerate(cards)
         n_intersect = count_gains(card)

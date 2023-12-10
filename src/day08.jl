@@ -1,9 +1,9 @@
 module Day08
 
-using AdventOfCode2023, Revise
+using AdventOfCode2023
 
-function day08(input::String=readInput(08))
-    instr, network = split(strip(input), "\n"; keepempty=false) |>
+function day08(input=readInput(08))
+    instr, network = split(input, "\n"; keepempty=false) |>
         x -> (x[1], Dict(y[1:3] => (y[8:10], y[13:15]) for y in x[2:end]))
 
     # Part 1

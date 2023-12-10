@@ -1,19 +1,19 @@
 module Day06
 
-using AdventOfCode2023, Revise
+using AdventOfCode2023
 
-function day06(input::String=readInput(06))
-    function beat_race_n(time, distance)
-        race_counter = 0
-        for t in floor(Int, time / 2):-1:1 # backward loop over half of the (symmetric) domain
-            if (t * (time - t) > distance) race_counter += 1
-            else break
-            end
+function beat_race_n(time, distance)
+    race_counter = 0
+    for t in floor(Int, time / 2):-1:1 # backward loop over half of the (symmetric) domain
+        if (t * (time - t) > distance) race_counter += 1
+        else break
         end
-        return mod(time, 2) == 0 ? 2 * race_counter - 1 : 2 * race_counter
     end
+    return mod(time, 2) == 0 ? 2 * race_counter - 1 : 2 * race_counter
+end
 
-    races_p1 = split(strip(input), "\n") .|>
+function day06(input=readInput(06))
+    races_p1 = split(input, "\n") .|>
         x -> split(x, ":")[end] .|>
         x -> parse.(Int, split(x, " "; keepempty=false))
 

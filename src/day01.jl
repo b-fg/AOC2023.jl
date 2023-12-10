@@ -2,7 +2,7 @@ module Day01
 
 using AdventOfCode2023
 
-patterns = [
+const patterns = [
     "one" => "o1e",
     "two"=>"t2o",
     "three"=>"t3e",
@@ -14,12 +14,13 @@ patterns = [
     "nine" => "n9e",
 ]
 
-function day01(input::String=readInput(01))
-    function filter_and_sum(line)
-        digits = filter!(isdigit, collect.(line))
-        sum(parse.(Int, join(digits[[1, length(digits)]])))
-    end
-    corrupted_values = split(strip(input), "\n")
+function filter_and_sum(line)
+    digits = filter!(isdigit, collect.(line))
+    sum(parse.(Int, join(digits[[1, length(digits)]])))
+end
+
+function day01(input=readInput(01))
+    corrupted_values = split(input, "\n")
 
     # Part 1
     count_p1 = 0

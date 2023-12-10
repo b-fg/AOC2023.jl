@@ -1,9 +1,9 @@
 module Day09
 
-using AdventOfCode2023, Revise
+using AdventOfCode2023
 
-function day09(input::String=readInput(09))
-    histories =  split(strip(input), "\n") .|> x -> split(x, " "; keepempty=false) .|> x -> parse.(Int, x)
+function day09(input=readInput(09))
+    histories =  split(input, "\n") .|> x -> split(x, " "; keepempty=false) .|> x -> parse.(Int, x)
     count_p1, count_p2 = 0, 0
     for history in histories
         h = diff(history)
@@ -16,7 +16,7 @@ function day09(input::String=readInput(09))
         end
         count_p1 += sum(lasth)
 
-        for i in length(firsth)-1:-1:1 # part 2
+        for i in length(firsth)-1:-1:1
             firsth[i] -= firsth[i+1]
         end
         count_p2 += firsth[1]

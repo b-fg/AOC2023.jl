@@ -1,28 +1,41 @@
 module AdventOfCode2023
 
-# Using https://github.com/goggle/AdventOfCode2021.jl as template
+# See https://github.com/goggle/AdventOfCode2021.jl for original package template
 
 using Revise
 using BenchmarkTools
 using Printf
 using OutMacro; export @out
 
-solvedDays = [i for i ∈ 1:9]
+solvedDays = [parse(Int, x[4:5]) for x in readdir(@__DIR__) if startswith(x, "day")]
 
-# Read the input from a file:
+# Read the input from a file
 function readInput(path::String)
     s = open(path, "r") do file
         read(file, String)
     end
-    return s
+    return strip(s)
 end
-function readInput(day::Integer)
-    path = joinpath(@__DIR__, "..", "data", @sprintf("day%02d.txt", day))
-    return readInput(path)
-end
+readInput(day::Integer) = joinpath(@__DIR__, "..", "data", @sprintf("day%02d.txt", day)) |> readInput
 export readInput
 
-# Utility function to decode images:
+# Export a function `dayXY` for each day
+for day in solvedDays
+    include(joinpath(@__DIR__, "day$(@sprintf("%02d", day)).jl"))
+    global ds = @sprintf("day%02d.txt", day)
+    global modSymbol = Symbol(@sprintf("Day%02d", day))
+    global dsSymbol = Symbol(@sprintf("day%02d", day))
+
+    @eval begin
+        input_path = joinpath(@__DIR__, "..", "data", ds)
+        function $dsSymbol(input::String = readInput($day))
+            return AdventOfCode2023.$modSymbol.$dsSymbol(input)
+        end
+        export $dsSymbol
+    end
+end
+
+# Utility function to decode images
 function generate_image(image)
     block = '\u2588'
     empty = ' '
@@ -37,28 +50,7 @@ function generate_image(image)
 end
 export generate_image
 
-# Include the source files:
-for day in solvedDays
-    ds = @sprintf("%02d", day)
-    include(joinpath(@__DIR__, "day$ds.jl"))
-end
-
-# Export a function `dayXY` for each day:
-for d in solvedDays
-    global ds = @sprintf("day%02d.txt", d)
-    global modSymbol = Symbol(@sprintf("Day%02d", d))
-    global dsSymbol = Symbol(@sprintf("day%02d", d))
-
-    @eval begin
-        input_path = joinpath(@__DIR__, "..", "data", ds)
-        function $dsSymbol(input::String = readInput($d))
-            return AdventOfCode2023.$modSymbol.$dsSymbol(input)
-        end
-        export $dsSymbol
-    end
-end
-
-# Benchmark a list of different problems:
+# Benchmark a list of different problems
 function benchmark(days=solvedDays)
     results = []
     for day in days
@@ -74,7 +66,7 @@ function benchmark(days=solvedDays)
 end
 export benchmark
 
-# Write the benchmark results into a markdown string:
+# Write the benchmark results into a markdown string
 function _to_markdown_table(bresults)
     header = "| Day | Time | Allocated memory |\n" *
              "|----:|-----:|-----------------:|"
