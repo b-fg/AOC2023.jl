@@ -39,3 +39,7 @@ end
 @testset "Day 10" begin
     @test AdventOfCode2023.Day10.day10() == (6886, 371)
 end
+
+@testset "Day 11" begin
+    @test AdventOfCode2023.Day11.day11() == (9418609, 593821230983)
+end

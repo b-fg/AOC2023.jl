@@ -5,6 +5,7 @@ version = "0.1.0"
 
 [deps]
 BenchmarkTools = "6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf"
+Combinatorics = "861a8166-3701-5b0c-9a16-15d98fcdc6aa"
 OutMacro = "0ae4d431-9932-4135-a8f1-51ee5e017775"
 PaddedViews = "5432bcbf-9aad-5242-b902-cca2824c8663"
 Printf = "de0858da-6303-5e67-8744-51eddeeeb8d7"
